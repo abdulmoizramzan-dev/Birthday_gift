@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Aymen ♡</title>
+
+  <style>
+    :root {
+      --pink: #ff75a8;
+      --deep-pink: #ed4f8b;
+      --light-pink: #fff0f6;
+      --pale-pink: #ffe0ec;
+      --white: #ffffff;
+      --text: #75354f;
+      --muted: #a56b83;
+      --border: #ffd0e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #fff8fb, #ffe0ec, #fff);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      overflow-x: hidden;
+    }
+
+    .background-hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ffb3cf;
+      opacity: 0.45;
+      animation: float 9s infinite ease-in-out;
+      font-size: 22px;
+    }
+
+    .heart:nth-child(1) { left: 8%; top: 15%; }
+    .heart:nth-child(2) { left: 85%; top: 20%; animation-delay: 2s; }
+    .heart:nth-child(3) { left: 18%; top: 80%; animation-delay: 4s; }
+    .heart:nth-child(4) { left: 78%; top: 75%; animation-delay: 1s; }
+    .heart:nth-child(5) { left: 50%; top: 8%; animation-delay: 3s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-22px) rotate(10deg); }
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 650px;
+      animation: appear 0.55s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 36px 30px;
+      box-shadow: 0 18px 55px rgba(237, 79, 139, 0.13);
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--deep-pink);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 7vw, 49px);
+      line-height: 1.15;
+      color: var(--deep-pink);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      color: var(--deep-pink);
+      font-size: 27px;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      color: var(--deep-pink);
+      margin-bottom: 12px;
+    }
+
+    p {
+      line-height: 1.8;
+      margin-bottom: 17px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--pink), var(--deep-pink));
+      color: white;
+      padding: 14px 25px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(237, 79, 139, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 11px 25px rgba(237, 79, 139, 0.28);
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--deep-pink);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .progress-wrap {
+      background: var(--light-pink);
+      border-radius: 20px;
+      height: 9px;
+      overflow: hidden;
+      margin: 22px 0 12px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--pink), var(--deep-pink));
+      border-radius: 20px;
+      transition: width 0.35s;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .puzzle-number {
+      display: inline-block;
+      background: var(--light-pink);
+      color: var(--deep-pink);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .question {
+      font-size: 19px;
+      font-weight: 700;
+      margin: 10px 0 22px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .option {
+      background: #fff9fc;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 15px;
+      padding: 15px 10px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: var(--light-pink);
+      border-color: var(--pink);
+    }
+
+    .option.correct {
+      background: #f0fff5;
+      border-color: #8bd6a4;
+      color: #287747;
+    }
+
+    .option.wrong {
+      background: #fff0f0;
+      border-color: #f0a3a3;
+      color: #a13b3b;
+    }
+
+    .feedback {
+      min-height: 27px;
+      color: var(--deep-pink);
+      font-weight: 600;
+      font-size: 14px;
+      margin: 12px 0;
+    }
+
+    .hint {
+      background: var(--light-pink);
+      border-radius: 13px;
+      padding: 13px;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 15px 0;
+      display: none;
+    }
+
+    .hint.show {
+      display: block;
+    }
+
+    .text-answer {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      outline: none;
+      font: inherit;
+      color: var(--text);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .text-answer:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(255, 117, 168, 0.13);
+    }
+
+    .note {
+      text-align: left;
+      background: linear-gradient(145deg, #fff8fb, #fff0f6);
+      border: 1px solid var(--border);
+      padding: 25px;
+      border-radius: 20px;
+      margin: 24px 0;
+    }
+
+    .note p {
+      margin-bottom: 15px;
+    }
+
+    .signature {
+      text-align: right;
+      color: var(--deep-pink);
+      font-weight: 700;
+      margin-top: 22px;
+    }
+
+    .gift-box {
+      margin: 26px 0;
+      padding: 25px 18px;
+      background: var(--light-pink);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+
+    .gift-box p {
+      margin-bottom: 20px;
+    }
+
+    .football-joke {
+      background: white;
+      border: 1px dashed var(--pink);
+      padding: 17px;
+      border-radius: 16px;
+      margin: 22px 0;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 22px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 14px; }
+      .card { padding: 28px 19px; }
+      .options { grid-template-columns: 1fr; }
+      .note { padding: 19px; }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+  <div class="background-hearts" aria-hidden="true">
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+  </div>
+
+  <!-- Welcome screen -->
+  <section class="screen active" id="welcome">
+    <div class="card">
+      <div class="eyebrow">A little something for you</div>
+      <h1>Happy Birthday,<br>Aymen ♡</h1>
+      <p class="subtitle">
+        Your gift is waiting, but first… let's see if you can unlock it.
+      </p>
+      <button class="btn" onclick="startGame()">Open Your Gift ♡</button>
+      <div class="footer">Made especially for you</div>
+    </div>
+  </section>
+
+  <!-- Puzzle screen -->
+  <section class="screen" id="puzzles">
+    <div class="card">
+      <div class="eyebrow">The birthday challenge</div>
+      <h2>Unlock Your Gift</h2>
+      <p class="subtitle">Solve all three little challenges to continue.</p>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Puzzle 1 of 3</div>
+
+      <div id="puzzleContent"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+      <div class="hint" id="hint"></div>
+
+      <button class="btn btn-outline" id="hintButton" onclick="showHint()">
+        Need a Hint?
+      </button>
+      <button class="btn" id="nextButton" onclick="nextPuzzle()" hidden>
+        Next Puzzle →
+      </button>
+    </div>
+  </section>
+
+  <!-- Birthday note -->
+  <section class="screen" id="noteScreen">
+    <div class="card">
+      <div class="eyebrow">You unlocked it ♡</div>
+      <h2>A Little Note for You</h2>
+
+      <div class="note">
+        <p><strong>Aymen,</strong></p>
+
+        <p>
+          These years have been full of ups and downs. Some days were heavy,
+          some days were beautiful — but every step shaped who you are today.
+        </p>
+
+        <p>
+          I'm really proud of you. We became close friends, and that's
+          something I'll always be grateful for. No matter the distance,
+          that bond still matters.
+        </p>
+
+        <p>
+          I hope this new chapter of your life brings you happiness,
+          beautiful memories, and reasons to smile even on the hardest days.
+          You deserve a birthday as lovely as the person you're celebrating it with.
+        </p>
+
+        <p>
+          Keep being yourself, keep chasing the things that matter to you,
+          and never forget how much the people around you appreciate you.
+        </p>
+
+        <div class="signature">
+          With love and friendship ♡
+        </div>
+      </div>
+
+      <button class="btn" onclick="showScreen('finalScreen')">
+        There's More… ♡
+      </button>
+    </div>
+  </section>
+
+  <!-- Final surprise and real gift -->
+  <section class="screen" id="finalScreen">
+    <div class="card">
+      <div class="eyebrow">One last surprise</div>
+      <h1>Happy Birthday! ♡</h1>
+
+      <p>
+        I hope your day is full of happiness, laughter, and memories
+        you'll look back on with a smile.
+      </p>
+
+      <div class="football-joke">
+        <strong>And of course, I couldn't forget this…</strong>
+        <p style="margin: 10px 0 0;">
+          Real Madrid lost Barca won , Pedri>>>Bellingham
+        </p>
+      </div>
+
+      <p>You've solved the puzzles and unlocked your note.</p>
+
+      <div class="gift-box">
+        <h3>And finally…</h3>
+        <p>
+          You've made it all the way to the end.
+          <strong>Here's your real gift. ♡</strong>
+        </p>
+
+        <a
+          class="btn"
+          href="https://youtu.be/YBS8rJvxnKo?si=AKkkkcDgeh2rMsjt"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Here Is Your Real Gift ♡
+        </a>
+      </div>
+
+      <button class="btn btn-outline" onclick="celebrate()">
+        Celebrate Again ♡
+      </button>
+
+      <div class="footer">Made with care, just for you ♡</div>
+    </div>
+  </section>
+
+  <script>
+    const puzzles = [
+      {
+        type: "choice",
+        title: "The first challenge",
+        question:
+          "I have a face and two hands, but no arms or legs. What am I?",
+        options: ["A doll", "A clock", "A painting", "A book"],
+        answer: 1,
+        hint: "Whats the time nga?",
+        success: "Correct! Off to a great start. ♡"
+      },
+      {
+        type: "choice",
+        title: "The second challenge",
+        question: "What number comes next?  2, 4, 8, 16, ___",
+        options: ["20", "24", "30", "32"],
+        answer: 3,
+        hint: "Noob it's basic maths",
+        success: "You got it! One more to go. ♡"
+      },
+      {
+        type: "text",
+        title: "The final challenge",
+        question: "Unscramble these letters to reveal the birthday girl's name:",
+        letters: "N  E  M  Y  A",
+        answer: "aymen",
+        hint: "Really nigga?",
+        success: "Perfect! You've unlocked your birthday note. ♡"
+      }
+    ];
+
+    let currentPuzzle = 0;
+    let completed = false;
+
+    function showScreen(id) {
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+      });
+
+      document.getElementById(id).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // A big confetti burst when the final birthday page appears.
+      if (id === "finalScreen") {
+        launchConfetti(320);
+        setTimeout(() => launchConfetti(220), 650);
+        setTimeout(() => launchConfetti(180), 1350);
+      }
+    }
+
+    function startGame() {
+      currentPuzzle = 0;
+      showScreen("puzzles");
+      renderPuzzle();
+    }
+
+    function renderPuzzle() {
+      completed = false;
+
+      const puzzle = puzzles[currentPuzzle];
+      const content = document.getElementById("puzzleContent");
+
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("hint").textContent = "";
+      document.getElementById("hint").classList.remove("show");
+      document.getElementById("hintButton").hidden = false;
+      document.getElementById("nextButton").hidden = true;
+
+      document.getElementById("progressBar").style.width =
+        (currentPuzzle / puzzles.length) * 100 + "%";
+
+      document.getElementById("progressLabel").textContent =
+        `Puzzle ${currentPuzzle + 1} of ${puzzles.length}`;
+
+      let html = `
+        <div class="puzzle-number">${puzzle.title}</div>
+        <div class="question">${puzzle.question}</div>
+      `;
+
+      if (puzzle.type === "choice") {
+        html += `<div class="options">`;
+
+        puzzle.options.forEach((option, index) => {
+          html += `
+            <button class="option" onclick="checkChoice(${index})">
+              ${option}
+            </button>
+          `;
+        });
+
+        html += `</div>`;
+      } else {
+        html += `
+          <div class="puzzle-number" style="font-size: 20px; letter-spacing: 4px;">
+            ${puzzle.letters}
+          </div>
+          <input
+            class="text-answer"
+            id="textAnswer"
+            type="text"
+            placeholder="Type your answer..."
+            autocomplete="off"
+            aria-label="Your answer"
+            onkeydown="if(event.key === 'Enter') checkTextAnswer()"
+          />
+          <button class="btn" onclick="checkTextAnswer()">Submit Answer</button>
+        `;
+      }
+
+      content.innerHTML = html;
+    }
+
+    function checkChoice(selected) {
+      if (completed) return;
+
+      const puzzle = puzzles[currentPuzzle];
+      const buttons = document.querySelectorAll(".option");
+
+      if (selected === puzzle.answer) {
+        completed = true;
+        buttons[selected].classList.add("correct");
+        document.getElementById("feedback").textContent = puzzle.success;
+        document.getElementById("progressBar").style.width =
+          ((currentPuzzle + 1) / puzzles.length) * 100 + "%";
+        document.getElementById("hintButton").hidden = true;
+        document.getElementById("nextButton").hidden = false;
+
+        buttons.forEach(button => button.disabled = true);
+      } else {
+        buttons[selected].classList.add("wrong");
+        document.getElementById("feedback").textContent =
+          "Not quite! Try again. ♡";
+
+        setTimeout(() => {
+          buttons[selected]?.classList.remove("wrong");
+        }, 650);
+      }
+    }
+
+    function checkTextAnswer() {
+      if (completed) return;
+
+      const input = document.getElementById("textAnswer");
+      const answer = input.value.trim().toLowerCase();
+
+      if (answer === puzzles[currentPuzzle].answer) {
+        completed = true;
+        input.disabled = true;
+
+        document.getElementById("feedback").textContent =
+          puzzles[currentPuzzle].success;
+
+        document.getElementById("progressBar").style.width = "100%";
+        document.getElementById("hintButton").hidden = true;
+        document.getElementById("nextButton").hidden = false;
+        document.getElementById("nextButton").textContent =
+          "Unlock My Note ♡";
+      } else {
+        document.getElementById("feedback").textContent =
+          "Almost! Check the letters and try again.";
+        input.focus();
+      }
+    }
+
+    function showHint() {
+      const hintBox = document.getElementById("hint");
+      hintBox.textContent = "Hint: " + puzzles[currentPuzzle].hint;
+      hintBox.classList.add("show");
+    }
+
+    function nextPuzzle() {
+      if (!completed) return;
+
+      if (currentPuzzle < puzzles.length - 1) {
+        currentPuzzle++;
+        renderPuzzle();
+      } else {
+        showScreen("noteScreen");
+      }
+    }
+
+    // Pink-and-white confetti, drawn on a canvas so no extra library is needed.
+    const confettiCanvas = document.getElementById("confettiCanvas");
+    const confettiContext = confettiCanvas.getContext("2d");
+    let confettiPieces = [];
+    let confettiAnimation = null;
+
+    function resizeConfettiCanvas() {
+      const ratio = window.devicePixelRatio || 1;
+      confettiCanvas.width = Math.floor(window.innerWidth * ratio);
+      confettiCanvas.height = Math.floor(window.innerHeight * ratio);
+      confettiContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    window.addEventListener("resize", resizeConfettiCanvas);
+    resizeConfettiCanvas();
+
+    function launchConfetti(amount = 180) {
+      const colors = ["#ff75a8", "#ed4f8b", "#ffc2da", "#ffffff", "#ff9fc4", "#f7c6d9"];
+      const width = window.innerWidth;
+
+      for (let i = 0; i < amount; i++) {
+        confettiPieces.push({
+          x: Math.random() * width,
+          y: -20 - Math.random() * window.innerHeight * 0.65,
+          w: 5 + Math.random() * 8,
+          h: 7 + Math.random() * 10,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 5,
+          vy: 2 + Math.random() * 5.5,
+          rotation: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.18,
+          sway: Math.random() * 0.06,
+          life: 0
+        });
+      }
+
+      if (!confettiAnimation) animateConfetti();
+    }
+
+    function animateConfetti() {
+      confettiContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      confettiPieces = confettiPieces.filter(piece =>
+        piece.y < window.innerHeight + 35 && piece.life < 420
+      );
+
+      for (const piece of confettiPieces) {
+        piece.life++;
+        piece.x += piece.vx + Math.sin(piece.life * piece.sway) * 1.2;
+        piece.y += piece.vy;
+        piece.rotation += piece.spin;
+        piece.vy += 0.018;
+
+        confettiContext.save();
+        confettiContext.translate(piece.x, piece.y);
+        confettiContext.rotate(piece.rotation);
+        confettiContext.fillStyle = piece.color;
+        confettiContext.fillRect(-piece.w / 2, -piece.h / 2, piece.w, piece.h);
+        confettiContext.restore();
+      }
+
+      if (confettiPieces.length) {
+        confettiAnimation = requestAnimationFrame(animateConfetti);
+      } else {
+        confettiContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        confettiAnimation = null;
+      }
+    }
+
+    function celebrate() {
+      // This button only launches confetti; it doesn't change pages.
+      launchConfetti(420);
+      setTimeout(() => launchConfetti(260), 350);
+    }
+  </script>
+</body>
+</html>
